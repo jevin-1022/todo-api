@@ -14,7 +14,6 @@ exports.authenticateJWT = (req, res, next) => {
     }
 
     const user = await User.findById(decodedToken._id).select("_id firstName lastName email").lean();
-    console.log('user: ', user);
     if (!user) {
       return res.status(401).send("Access denied");
     }

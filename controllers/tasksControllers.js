@@ -3,8 +3,13 @@ const Task = require("../models/taskModel");
 // Create Task
 exports.createTask = async (req, res) => {
   try {
-    const { body: payload } = req;
-    const newTask = await Task.create(payload);
+    const { body: payload, user } = req;
+
+    const finalPayload = {
+      ...payload,
+      userId: user && user._id ? user._id : null
+    }
+    const newTask = await Task.create(finalPayload);
 
     res.status(201).json({ message: "Task added", task: newTask });
   } catch (error) {
@@ -39,8 +44,8 @@ exports.updateTask = async (req, res) => {
 // Get Task list
 exports.getAllTask = async (req, res) => {
   try {
-    const { query } = req;
-    const allTasks = await Task.find({}).lean();
+    const { query, user } = req;
+    const allTasks = await Task.find({ userId: user._id }).lean();
 
     res.status(201).json(allTasks);
   } catch (error) {

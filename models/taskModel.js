@@ -22,6 +22,11 @@ const userSchema = new mongoose.Schema(
       enum: ["pending", "completed"],
       required: true,
     },
+    userId: {
+      type: Types.ObjectId,
+      ref: 'users',
+      required: true
+    },
     createdAt: {
       type: Types.Date,
       default: null,
