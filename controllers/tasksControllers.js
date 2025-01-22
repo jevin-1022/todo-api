@@ -54,6 +54,23 @@ exports.getAllTask = async (req, res) => {
   }
 };
 
+// Get By Id
+exports.getById = async (req, res) => {
+  try {
+    const { params, user } = req;
+
+    const task = await Task.findOne({ _id: params.id, userId: user._id }).lean()
+    if (!task) {
+        res.status(500).json({ error: "Task not found" });
+    }
+
+    res.status(201).json(task);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to get task list." });
+  }
+};
+
 // delete Task
 exports.deleteTask = async (req, res) => {
   try {

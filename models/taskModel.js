@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema(
     },
     status: {
       type: Types.String,
-      enum: ["pending", "completed"],
+      enum: ["Pending", "Completed"],
       required: true,
     },
     userId: {

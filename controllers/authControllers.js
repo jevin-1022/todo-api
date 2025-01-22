@@ -17,6 +17,8 @@ exports.signUp = async (req, res) => {
 
     const newUser = await User.create(payload);
 
+    delete newUser.password
+
     res.status(201).json({ message: "Sign up successfully", user: newUser });
   } catch (error) {
     console.error(error);
@@ -51,7 +53,7 @@ exports.login = async (req, res) => {
     delete user.password;
 
     // If password is correct, send success response
-    res.status(200).json({ message: "Login successful", user, accessToken });
+    res.status(200).json({ user, accessToken });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to logged in" });

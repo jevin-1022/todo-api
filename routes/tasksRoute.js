@@ -13,6 +13,9 @@ routes.put("/:id", taskController.updateTask);
 // Get task list
 routes.get("/", taskController.getAllTask);
 
+// Get by id
+routes.get("/:id", taskController.getById);
+
 // Delete task
 routes.delete("/:id", taskController.deleteTask);
 
